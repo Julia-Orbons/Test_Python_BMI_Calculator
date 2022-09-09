@@ -1,0 +1,46 @@
+#Python_BMI_Calculator
+import pandas as pd
+
+#Create dataframe for BMI data
+bmi_data = [{"Gender": "Male", "HeightCm": 171, "WeightKg": 96 },
+{ "Gender": "Male", "HeightCm": 161, "WeightKg": 85 },
+{ "Gender": "Male", "HeightCm": 180, "WeightKg": 77 },
+{ "Gender": "Female", "HeightCm": 166, "WeightKg": 62},
+{"Gender": "Female", "HeightCm": 150, "WeightKg": 70},
+{"Gender": "Female", "HeightCm": 167, "WeightKg": 82}]
+
+bmi_df = pd.DataFrame(bmi_data)
+
+#Add columns for bmi, bmi_category, and health_risk
+bmi = []
+bmi_category = []
+healh_risk = []
+
+#Fill columns with bmi, bmi_category, and health_risk
+for i in bmi_df:
+  bmi = float(i['WeightKg']/sqrt(i['HeightCm']))
+  bmi_category = str()
+  health_risk = str()
+  if bmi <= 18.4:
+    bmi_category = 'Underweight'
+    health_risk = 'Malnutrition risk'
+    if bmi >=18.5 and <= 24.9:
+    bmi_category = 'Normal weight'
+    health_risk = 'Low risk'
+  if bmi >= 25.0 and <= 29.9:
+    bmi_category = 'Overweigth'
+    health_risk = 'Enhanced risk'
+  if bmi >= 30.0 and <= 34.9:
+    bmi_category = 'Moderately obese'
+    health_risk = 'Medium risk'
+  if bmi >= 35.0 and <= 39.9:
+    bmi_category = 'Severely obese'
+    health_risk = 'High risk'
+  if bmi >= 40.0:
+    bmi_category = 'Very severely obese'
+    health_risk = 'Very high risk'
+  i['bmi'] = bmi
+  i['bmi_category'] = bmi_category
+  i['health_risk'] = health_risk
+  
+    
