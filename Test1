@@ -1,5 +1,6 @@
 #Python_BMI_Calculator
 import pandas as pd
+import numpy as np
 
 #Create dataframe for BMI data
 bmi_data = [{"Gender": "Male", "HeightCm": 171, "WeightKg": 96 },
@@ -9,38 +10,69 @@ bmi_data = [{"Gender": "Male", "HeightCm": 171, "WeightKg": 96 },
 {"Gender": "Female", "HeightCm": 150, "WeightKg": 70},
 {"Gender": "Female", "HeightCm": 167, "WeightKg": 82}]
 
-bmi_df = pd.DataFrame(bmi_data)
+bmi_df = pd.DataFrame.from_dict(bmi_data)
 
+#TASK1----------------------------------------------
 #Add columns for bmi, bmi_category, and health_risk
-bmi = []
-bmi_category = []
-healh_risk = []
+bmi = [0,0,0,0,0,0]
+bmi_category = ['','','','','','']
+health_risk = ['','','','','','']
+
+bmi_df['bmi'] = bmi
+bmi_df['bmi_category'] = bmi_category
+bmi_df['health_risk'] = health_risk
+
+#Check if bmi dataframe is made correctly
+#print(bmi_df)
+#for i in bmi_df.values:
+    #print(i)
 
 #Fill columns with bmi, bmi_category, and health_risk
-for i in bmi_df:
-  bmi = float(i['WeightKg']/sqrt(i['HeightCm']))
+for i in bmi_df.values:
+  bmi = float(i[2]/((i[1]/100))**2)
   bmi_category = str()
   health_risk = str()
   if bmi <= 18.4:
-    bmi_category = 'Underweight'
-    health_risk = 'Malnutrition risk'
-    if bmi >=18.5 and <= 24.9:
-    bmi_category = 'Normal weight'
-    health_risk = 'Low risk'
-  if bmi >= 25.0 and <= 29.9:
-    bmi_category = 'Overweigth'
-    health_risk = 'Enhanced risk'
-  if bmi >= 30.0 and <= 34.9:
-    bmi_category = 'Moderately obese'
-    health_risk = 'Medium risk'
-  if bmi >= 35.0 and <= 39.9:
-    bmi_category = 'Severely obese'
-    health_risk = 'High risk'
-  if bmi >= 40.0:
-    bmi_category = 'Very severely obese'
-    health_risk = 'Very high risk'
-  i['bmi'] = bmi
-  i['bmi_category'] = bmi_category
-  i['health_risk'] = health_risk
+      bmi_category = 'Underweight'
+      health_risk = 'Malnutrition risk'
+  if 18.5 <= bmi <= 24.9:
+      bmi_category = 'Normal weight'
+      health_risk = 'Low risk'
+  if 25.0 <= bmi <= 29.9:
+      bmi_category = 'Overweigth'
+      health_risk = 'Enhanced risk'
+  if 30.0 <= bmi <= 34.9:
+      bmi_category = 'Moderately obese'
+      health_risk = 'Medium risk'
+  if 35.0 <= bmi <= 39.9:
+      bmi_category = 'Severely obese'
+      health_risk = 'High risk'
+  if bmi>= 40.0:
+      bmi_category = 'Very severely obese'
+      health_risk = 'Very high risk'
+  bmi_df['bmi'] = bmi
+  bmi_df['bmi_category'] = bmi_category
+  bmi_df['health_risk'] = health_risk
   
-    
+print(bmi_df)
+
+#TASK2----------------------------------------------
+#Check the total number of overweigth people
+total_overweight = 0
+for i in bmi_df.values:
+    if i[4] == 'Overweigth':
+        total_overweight = total_overweight +1
+    else:
+        continue
+print("Total people classified as Overweight is: ",total_overweight)
+
+
+
+
+#TASK3----------------------------------------------
+
+
+
+#TASK4----------------------------------------------
+
+
