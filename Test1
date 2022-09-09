@@ -22,11 +22,6 @@ bmi_df['bmi'] = bmi
 bmi_df['bmi_category'] = bmi_category
 bmi_df['health_risk'] = health_risk
 
-#Check if bmi dataframe is made correctly
-#print(bmi_df)
-#for i in bmi_df.values:
-    #print(i)
-
 #Fill columns with bmi, bmi_category, and health_risk
 for i in bmi_df.values:
   bmi = float(i[2]/((i[1]/100))**2)
